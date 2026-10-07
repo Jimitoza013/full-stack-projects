@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Orbit — Upcoming Events</title>
+<link rel="stylesheet" href="css/style.css">
+
+</head>
+<body>
+<div class="orb one"></div><div class="orb two"></div>
+
+<div class="topbar">
+  <span>✦ Your schedule, beautifully organized — smart reminders are now live.</span>
+  <button onclick="showToast('Smart reminders are enabled','You will receive a gentle alert before important events.')">Try it →</button>
+</div>
+
+<div class="nav-wrap">
+  <nav class="nav">
+    <a class="logo" href="#">
+      <span class="logo-mark">◷</span><span>Orbit</span>
+    </a>
+    <div class="navlinks">
+      <button class="active">Home</button>
+      <button>Events⌄</button>
+      <button>Calendar</button>
+      <button>Availability</button>
+      <button>Analytics</button>
+    </div>
+    <div class="right">
+      <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Switch to dark mode" title="Switch theme">
+        <span class="sun">☀</span><span class="moon">☾</span>
+      </button>
+      <button onclick="showToast('Share link copied','Your public scheduling link is ready to share.')">Share link</button>
+      <button onclick="openModal()">＋ New event</button>
+      <div class="profile">JO</div>
+    </div>
+    <button class="mobile-btn" onclick="toggleMobile()">☰</button>
+  </nav>
+</div>
+
+<div class="glass-float" aria-live="polite">
+  <span class="live-dot"></span>
+  <div class="glass-copy">
+    <strong>Next up · Product design review</strong>
+    <span>Today at 10:30 AM · 45 min · Google Meet</span>
+  </div>
+  <button onclick="showToast('Meeting opened','Product design review is ready.')">Open</button>
+</div>
+
+<main class="container">
+  <section class="hero-row">
+    <div>
+      <div class="eyebrow">Wednesday · October 7, 2026</div>
+      <h1>Your upcoming events</h1>
+      <p class="sub">Everything important, in one calm view. Nothing gets lost.</p>
+    </div>
+    <div class="hero-actions">
+      <button class="action" onclick="showToast('Calendar synced','Your Google Calendar is up to date.')">↻ Sync calendar</button>
+      <button class="action primary" onclick="openModal()">＋ Create event</button>
+    </div>
+  </section>
+
+  <section class="dashboard">
+    <aside class="sidebar">
+      <div class="side-title">Workspace</div>
+      <button class="side-link active"><span class="side-icon">⌂</span>Overview</button>
+      <button class="side-link"><span class="side-icon">◷</span>Upcoming</button>
+      <button class="side-link"><span class="side-icon">✓</span>Completed</button>
+      <button class="side-link"><span class="side-icon">↗</span>Availability</button>
+      <div class="side-title" style="margin-top:8px">Manage</div>
+      <button class="side-link"><span class="side-icon">▦</span>Event types</button>
+      <button class="side-link"><span class="side-icon">⚙</span>Settings</button>
+      <div class="mini-profile">
+        <div class="avatar">JO</div>
+        <div><b>Jimit Oza</b><span>Personal workspace</span></div>
+      </div>
+    </aside>
+
+    <section class="main-card">
+      <div class="toolbar">
+        <div class="tabs">
+          <button class="tab active" onclick="filterEvents('all',this)">All events</button>
+          <button class="tab" onclick="filterEvents('today',this)">Today</button>
+          <button class="tab" onclick="filterEvents('week',this)">This week</button>
+        </div>
+        <div class="search"><span>⌕</span><input id="search" oninput="searchEvents()" placeholder="Search events..."></div>
+      </div>
+
+      <div id="events">
+        <div class="day event-day" data-day="today">
+          <div class="day-head">
+            <div class="day-title">Today <small>Oct 7</small></div><span class="count">3 events</span>
+          </div>
+
+          <article class="event" data-title="Product design review">
+            <div><span class="time">10:30 AM</span><span class="duration">45 min</span></div>
+            <div>
+              <div class="event-title">Product design review</div>
+              <div class="event-meta"><span class="dot"></span> Google Meet · Design team</div>
+              <div class="event-people"><span class="person-a">AK</span><span class="person-b">MS</span><span class="person-c">RN</span></div>
+            </div>
+            <span class="event-status blue">Starting soon</span>
+          </article>
+
+          <article class="event green" data-title="Frontend standup">
+            <div><span class="time">1:00 PM</span><span class="duration">15 min</span></div>
+            <div>
+              <div class="event-title">Frontend standup</div>
+              <div class="event-meta"><span class="dot"></span> Slack Huddle · Engineering</div>
+              <div class="event-people"><span class="person-d">NS</span><span class="person-c">RP</span><span class="person-a">JM</span></div>
+            </div>
+            <span class="event-status">Confirmed</span>
+          </article>
+
+          <article class="event purple" data-title="Client strategy call">
+            <div><span class="time">4:30 PM</span><span class="duration">60 min</span></div>
+            <div>
+              <div class="event-title">Client strategy call</div>
+              <div class="event-meta"><span class="dot"></span> Zoom · Brightline Studio</div>
+              <div class="event-people"><span class="person-b">LM</span><span class="person-d">DS</span></div>
+            </div>
+            <span class="event-status wait">Needs prep</span>
+          </article>
+        </div>
+
+        <div class="day event-day" data-day="week">
+          <div class="day-head">
+            <div class="day-title">Tomorrow <small>Oct 8</small></div><span class="count">2 events</span>
+          </div>
+
+          <article class="event orange" data-title="Portfolio review">
+            <div><span class="time">11:00 AM</span><span class="duration">30 min</span></div>
+            <div>
+              <div class="event-title">Portfolio review</div>
+              <div class="event-meta"><span class="dot"></span> Google Meet · Alex Chen</div>
+            </div>
+            <span class="event-status">Confirmed</span>
+          </article>
+
+          <article class="event" data-title="Weekly planning">
+            <div><span class="time">3:00 PM</span><span class="duration">45 min</span></div>
+            <div>
+              <div class="event-title">Weekly planning</div>
+              <div class="event-meta"><span class="dot"></span> Office · Product team</div>
+            </div>
+            <span class="event-status blue">Upcoming</span>
+          </article>
+        </div>
+      </div>
+
+      <div class="calendar-widget">
+        <div class="calendar-copy">
+          <b>Your week at a glance</b>
+          <p>Tap a day to jump into your schedule.</p>
+        </div>
+        <div class="calendar-days">
+          <div class="cal-day"><span>MON</span><strong>5</strong></div>
+          <div class="cal-day"><span>TUE</span><strong>6</strong></div>
+          <div class="cal-day today"><span>WED</span><strong>7</strong></div>
+          <div class="cal-day"><span>THU</span><strong>8</strong></div>
+          <div class="cal-day"><span>FRI</span><strong>9</strong></div>
+        </div>
+      </div>
+    </section>
+  </section>
+</main>
+
+<div class="notify-stack" id="notifications"></div>
+
+<div class="modal-backdrop" id="modalBackdrop" onclick="if(event.target===this)closeModal()">
+  <div class="modal">
+    <div class="modal-head">
+      <div><div class="eyebrow">New event</div><h2>Create something worth meeting for.</h2></div>
+      <button class="close" onclick="closeModal()">×</button>
+    </div>
+    <div class="form-row"><label>Event name</label><input id="eventName" placeholder="e.g. Product discovery call"></div>
+    <div class="form-row"><label>Date & time</label><input type="datetime-local"></div>
+    <div class="form-row"><label>Meeting location</label><select><option>Google Meet</option><option>Zoom</option><option>In person</option></select></div>
+    <div class="modal-footer"><button class="action" onclick="closeModal()">Cancel</button><button class="action primary" onclick="createEvent()">Create event</button></div>
+  </div>
+</div>
+
+<script src="js/app.js" defer></script>
+
+</body>
+</html>
